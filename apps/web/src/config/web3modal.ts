@@ -1,5 +1,5 @@
 // utils/web3modal.ts
-import { createWeb3Modal, defaultConfig } from '@cocos-labs/web3modal-ethers5'
+import { createWeb3Modal, defaultConfig } from '@llweb3modal/ethers5/react'
 
 const polygonChain = {
   chainId: 137,

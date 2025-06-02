@@ -17,9 +17,11 @@ import useAuth from 'hooks/useAuth'
 import useNativeCurrency from 'hooks/useNativeCurrency'
 import useTokenBalance, { useGetCakeBalance } from 'hooks/useTokenBalance'
 import { ChainLogo } from 'components/Logo/ChainLogo'
+
 import { getBlockExploreLink, getBlockExploreName } from 'utils'
 import { formatBigNumber, getFullDisplayBalance } from '@pancakeswap/utils/formatBalance'
 import { useBalance } from 'wagmi'
+import { useDisconnect } from '@llweb3modal/ethers5/react'
 import CakeBenefitsCard from './CakeBenefitsCard'
 
 const COLORS = {
@@ -46,12 +48,12 @@ const WalletInfo: React.FC<WalletInfoProps> = ({ hasLowNativeBalance, onDismiss 
   const { balance: wBNBBalance, fetchStatus: wBNBFetchStatus } = useTokenBalance(wBNBToken?.address, true)
   const { balance: cakeBalance, fetchStatus: cakeFetchStatus } = useGetCakeBalance()
   const { logout } = useAuth()
-
+  const { disconnect } = useDisconnect()
 
   const handleLogout = () => {
     onDismiss?.()
     logout()
-
+    disconnect()
   }
 
   return (
