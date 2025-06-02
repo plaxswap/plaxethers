@@ -7,11 +7,13 @@ import noop from 'lodash/noop'
 import { RouterContext } from 'next/dist/shared/lib/router-context'
 import { NextRouter } from 'next/router'
 import Provider from 'Providers'
+import { Provider as JotaiProvider } from 'jotai'
 import { initializeStore, makeStore } from 'state'
 import { SWRConfig } from 'swr'
 import { vi } from 'vitest'
 import { WagmiConfig } from 'wagmi'
-import { client } from './utils/wagmi'
+import { useHydrateAtoms } from 'jotai/utils'
+import { wagmiConfig } from './utils/wagmi'
 
 const mockRouter: NextRouter = {
   basePath: '',
@@ -51,6 +53,23 @@ export function renderWithProvider(
   return rtlRender(ui, { wrapper: Wrapper, ...renderOptions })
 }
 
+const HydrateAtoms = ({ initialValues, children }) => {
+  // initialising on state with prop on render here
+  useHydrateAtoms(initialValues)
+  return children
+}
+
+export const createJotaiWrapper =
+  (reduxState = undefined, testAtom, initState = undefined) =>
+  ({ children }) =>
+    (
+      <Provider store={makeStore(reduxState)}>
+        <JotaiProvider>
+          {initState ? <HydrateAtoms initialValues={[[testAtom, initState]]}>{children}</HydrateAtoms> : children}
+        </JotaiProvider>
+      </Provider>
+    )
+
 export const createReduxWrapper =
   (initState = undefined) =>
   ({ children }) =>
@@ -60,7 +79,7 @@ export const createSWRWrapper =
   (fallbackData = undefined) =>
   ({ children }) =>
     (
-      <WagmiConfig client={client}>
+      <WagmiConfig config={wagmiConfig}>
         <SWRConfig value={{ fallback: fallbackData }}>{children}</SWRConfig>
       </WagmiConfig>
     )
@@ -68,7 +87,7 @@ export const createSWRWrapper =
 export const createWagmiWrapper =
   () =>
   ({ children }) =>
-    <WagmiConfig client={client}>{children}</WagmiConfig>
+    <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>
 
 // re-export everything
 export * from '@testing-library/react'
