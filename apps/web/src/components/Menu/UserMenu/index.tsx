@@ -20,7 +20,6 @@ import { useEffect, useState, useCallback } from 'react'
 import { useProfile } from 'state/profile/hooks'
 import { usePendingTransactions } from 'state/transactions/hooks'
 import { useAccount } from 'wagmi'
-import { useDisconnect } from '@web3modal/ethers5/react'
 import ProfileUserMenuItem from './ProfileUserMenuItem'
 import WalletModal, { WalletView } from './WalletModal'
 import WalletUserMenuItem from './WalletUserMenuItem'
@@ -29,7 +28,6 @@ const UserMenuItems = () => {
   const { t } = useTranslation()
   const { chainId, isWrongNetwork } = useActiveChainId()
   const { logout } = useAuth()
-  const { disconnect } = useDisconnect()
   const { address: account } = useAccount()
   const { hasPendingTransactions } = usePendingTransactions()
   const { isInitialized, isLoading, profile } = useProfile()
@@ -40,7 +38,6 @@ const UserMenuItems = () => {
 
   const handleLogout = () => {
     logout()
-    disconnect()
   }
 
   const onClickWalletMenu = useCallback((): void => {
