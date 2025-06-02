@@ -2,7 +2,7 @@ import {
   useWeb3ModalProvider,
   useWeb3ModalAccount,
   useWeb3Modal,
-} from '@web3modal/ethers5/react';
+} from '@cocos-labs/web3modal-ethers5';
 import { providers } from 'ethers';
 
 export function useActiveWeb3ModalReact() {
