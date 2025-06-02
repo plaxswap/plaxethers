@@ -52,7 +52,22 @@ const getWalletIcon = (marginTextBetweenLogo: string, name?: string) => {
     width: '16px',
     ...(marginTextBetweenLogo && { ml: marginTextBetweenLogo }),
   }
-  
+  if (name && Icons[name]) {
+    const Icon = Icons[name]
+    return <Icon {...iconProps} />
+  }
+  if (window?.ethereum?.isTrust) {
+    return <TrustWalletIcon {...iconProps} />
+  }
+  if (window?.ethereum?.isCoinbaseWallet) {
+    return <CoinbaseWalletIcon {...iconProps} />
+  }
+  if (window?.ethereum?.isTokenPocket) {
+    return <TokenPocketIcon {...iconProps} />
+  }
+  if (window?.ethereum?.isMetaMask) {
+    return <MetamaskIcon {...iconProps} />
+  }
   return <MetamaskIcon {...iconProps} />
 }
 
