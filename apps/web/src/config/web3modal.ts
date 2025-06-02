@@ -1,5 +1,5 @@
 // utils/web3modal.ts
-import { createWeb3Modal, defaultConfig } from '@llweb3modal/ethers5/react'
+import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5/react'
 
 const polygonChain = {
   chainId: 137,
@@ -27,5 +27,6 @@ createWeb3Modal({
   chains: [polygonChain],
   projectId,
   enableAnalytics: true,
+  allowUnsupportedChain: false,
   enableOnramp: false,
 })

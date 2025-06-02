@@ -2,7 +2,7 @@ import {
   useWeb3ModalProvider,
   useWeb3ModalAccount,
   useWeb3Modal,
-} from '@llweb3modal/ethers5/react';
+} from '@web3modal/ethers5/react';
 import { providers } from 'ethers';
 
 export function useActiveWeb3ModalReact() {

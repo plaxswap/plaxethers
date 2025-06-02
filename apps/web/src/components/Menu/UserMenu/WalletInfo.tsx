@@ -21,7 +21,7 @@ import { ChainLogo } from 'components/Logo/ChainLogo'
 import { getBlockExploreLink, getBlockExploreName } from 'utils'
 import { formatBigNumber, getFullDisplayBalance } from '@pancakeswap/utils/formatBalance'
 import { useBalance } from 'wagmi'
-import { useDisconnect } from '@llweb3modal/ethers5/react'
+import { useDisconnect } from '@web3modal/ethers5/react'
 import CakeBenefitsCard from './CakeBenefitsCard'
 
 const COLORS = {
