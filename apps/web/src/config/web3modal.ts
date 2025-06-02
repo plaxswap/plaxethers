@@ -27,6 +27,5 @@ createWeb3Modal({
   chains: [polygonChain],
   projectId,
   enableAnalytics: true,
-  allowUnsupportedChain: false,
   enableOnramp: false,
 })
